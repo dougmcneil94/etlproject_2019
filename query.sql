@@ -1,0 +1,23 @@
+CREATE TABLE AirbnbWA (
+Bedrooms INT PRIMARY KEY,
+Price INT NOT NULL,
+City VARCHAR(255)
+);
+
+CREATE TABLE AirbnbTX (
+Bedrooms INT PRIMARY KEY,
+Price INT NOT NULL,
+City VARCHAR(255)
+);
+
+DROP table AirbnbWA;
+DROP table AirbnbTX;
+
+CREATE TABLE AirbnbWA (
+Bedrooms INT PRIMARY KEY,
+Price INT NOT NULL,
+City VARCHAR(255)
+);
+
+SELECT * FROM AirbnbWA;
+SELECT * FROM AirbnbTX;
