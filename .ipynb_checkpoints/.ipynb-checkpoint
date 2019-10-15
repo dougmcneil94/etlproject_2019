@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 76,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -19,7 +19,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 77,
    "metadata": {},
    "outputs": [
     {
@@ -43,7 +43,7 @@
        "  <thead>\n",
        "    <tr style=\"text-align: right;\">\n",
        "      <th></th>\n",
-       "      <th>Unnamed: 0</th>\n",
+       "      <th>id</th>\n",
        "      <th>room_id</th>\n",
        "      <th>host_id</th>\n",
        "      <th>room_type</th>\n",
@@ -66,7 +66,7 @@
        "  <tbody>\n",
        "    <tr>\n",
        "      <th>0</th>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
        "      <td>2318</td>\n",
        "      <td>2536</td>\n",
        "      <td>Entire home/apt</td>\n",
@@ -87,7 +87,7 @@
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
-       "      <td>1</td>\n",
+       "      <td>2</td>\n",
        "      <td>3335</td>\n",
        "      <td>4193</td>\n",
        "      <td>Entire home/apt</td>\n",
@@ -108,7 +108,7 @@
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
-       "      <td>2</td>\n",
+       "      <td>3</td>\n",
        "      <td>4291</td>\n",
        "      <td>35749</td>\n",
        "      <td>Private room</td>\n",
@@ -129,7 +129,7 @@
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
-       "      <td>3</td>\n",
+       "      <td>4</td>\n",
        "      <td>5682</td>\n",
        "      <td>8993</td>\n",
        "      <td>Entire home/apt</td>\n",
@@ -150,7 +150,7 @@
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
-       "      <td>4</td>\n",
+       "      <td>5</td>\n",
        "      <td>6606</td>\n",
        "      <td>14942</td>\n",
        "      <td>Entire home/apt</td>\n",
@@ -174,19 +174,19 @@
        "</div>"
       ],
       "text/plain": [
-       "   Unnamed: 0  room_id  host_id        room_type                     address  \\\n",
-       "0           0     2318     2536  Entire home/apt  Seattle, WA, United States   \n",
-       "1           1     3335     4193  Entire home/apt  Seattle, WA, United States   \n",
-       "2           2     4291    35749     Private room  Seattle, WA, United States   \n",
-       "3           3     5682     8993  Entire home/apt  Seattle, WA, United States   \n",
-       "4           4     6606    14942  Entire home/apt  Seattle, WA, United States   \n",
+       "   id  room_id  host_id        room_type                     address  reviews  \\\n",
+       "0   1     2318     2536  Entire home/apt  Seattle, WA, United States       21   \n",
+       "1   2     3335     4193  Entire home/apt  Seattle, WA, United States        1   \n",
+       "2   3     4291    35749     Private room  Seattle, WA, United States       63   \n",
+       "3   4     5682     8993  Entire home/apt  Seattle, WA, United States      462   \n",
+       "4   5     6606    14942  Entire home/apt  Seattle, WA, United States      134   \n",
        "\n",
-       "   reviews  overall_satisfaction  accommodates  bedrooms  bathrooms  price  \\\n",
-       "0       21                   5.0             8         4        2.5    250   \n",
-       "1        1                   NaN             4         2        1.0    100   \n",
-       "2       63                   4.5             2         1        1.0     82   \n",
-       "3      462                   5.0             2         0        1.0     49   \n",
-       "4      134                   4.5             2         1        1.0     90   \n",
+       "   overall_satisfaction  accommodates  bedrooms  bathrooms  price  \\\n",
+       "0                   5.0             8         4        2.5    250   \n",
+       "1                   NaN             4         2        1.0    100   \n",
+       "2                   4.5             2         1        1.0     82   \n",
+       "3                   5.0             2         0        1.0     49   \n",
+       "4                   4.5             2         1        1.0     90   \n",
        "\n",
        "  last_modified   latitude   longitude  \\\n",
        "0       46:14.7  47.610819 -122.290816   \n",
@@ -210,20 +210,20 @@
        "4                Fab, private seattle urban cottage!      USD   nightly  "
       ]
      },
-     "execution_count": 12,
+     "execution_count": 77,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
-    "seattle_file = r\"C:\\Users\\Owner\\Documents\\School\\Homework\\etlproject_2019\\Resources\\seattle_01.csv\"\n",
+    "seattle_file = r\"C:\\Users\\njoku\\OneDrive\\Documents\\GitHub\\etlproject_2019\\Resources\\seattle_01.csv\"\n",
     "seattle_df = pd.read_csv(seattle_file, encoding=\"ISO-8859-1\")\n",
     "seattle_df.head()"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 78,
    "metadata": {},
    "outputs": [
     {
@@ -247,7 +247,7 @@
        "  <thead>\n",
        "    <tr style=\"text-align: right;\">\n",
        "      <th></th>\n",
-       "      <th>Unnamed: 0</th>\n",
+       "      <th>id</th>\n",
        "      <th>average_rate_per_night</th>\n",
        "      <th>bedrooms_count</th>\n",
        "      <th>city</th>\n",
@@ -266,7 +266,7 @@
        "      <td>$27</td>\n",
        "      <td>2</td>\n",
        "      <td>Humble</td>\n",
-       "      <td>May-16</td>\n",
+       "      <td>16-May</td>\n",
        "      <td>Welcome to stay in private room with queen bed...</td>\n",
        "      <td>30.020138</td>\n",
        "      <td>-95.293996</td>\n",
@@ -279,7 +279,7 @@
        "      <td>$149</td>\n",
        "      <td>4</td>\n",
        "      <td>San Antonio</td>\n",
-       "      <td>Nov-10</td>\n",
+       "      <td>10-Nov</td>\n",
        "      <td>Stylish, fully remodeled home in upscale NW ?...</td>\n",
        "      <td>29.503068</td>\n",
        "      <td>-98.447688</td>\n",
@@ -292,7 +292,7 @@
        "      <td>$59</td>\n",
        "      <td>1</td>\n",
        "      <td>Houston</td>\n",
-       "      <td>Jan-17</td>\n",
+       "      <td>17-Jan</td>\n",
        "      <td>'River house on island close to the city' \\nA ...</td>\n",
        "      <td>29.829352</td>\n",
        "      <td>-95.081549</td>\n",
@@ -305,7 +305,7 @@
        "      <td>$60</td>\n",
        "      <td>1</td>\n",
        "      <td>Bryan</td>\n",
-       "      <td>Feb-16</td>\n",
+       "      <td>16-Feb</td>\n",
        "      <td>Private bedroom in a cute little home situated...</td>\n",
        "      <td>30.637304</td>\n",
        "      <td>-96.337846</td>\n",
@@ -318,7 +318,7 @@
        "      <td>$75</td>\n",
        "      <td>2</td>\n",
        "      <td>Fort Worth</td>\n",
-       "      <td>Feb-17</td>\n",
+       "      <td>17-Feb</td>\n",
        "      <td>Welcome to our original 1920's home. We recent...</td>\n",
        "      <td>32.747097</td>\n",
        "      <td>-97.286434</td>\n",
@@ -330,26 +330,26 @@
        "</div>"
       ],
       "text/plain": [
-       "   Unnamed: 0 average_rate_per_night bedrooms_count         city  \\\n",
-       "0           1                   $27               2       Humble   \n",
-       "1           2                  $149               4  San Antonio   \n",
-       "2           3                   $59               1      Houston   \n",
-       "3           4                   $60               1        Bryan   \n",
-       "4           5                   $75               2   Fort Worth   \n",
+       "   id average_rate_per_night bedrooms_count         city date_of_listing  \\\n",
+       "0   1                   $27               2       Humble          16-May   \n",
+       "1   2                  $149               4  San Antonio          10-Nov   \n",
+       "2   3                   $59               1      Houston          17-Jan   \n",
+       "3   4                   $60               1        Bryan          16-Feb   \n",
+       "4   5                   $75               2   Fort Worth          17-Feb   \n",
        "\n",
-       "  date_of_listing                                        description  \\\n",
-       "0          May-16  Welcome to stay in private room with queen bed...   \n",
-       "1          Nov-10  Stylish, fully remodeled home in upscale NW ?...   \n",
-       "2          Jan-17  'River house on island close to the city' \\nA ...   \n",
-       "3          Feb-16  Private bedroom in a cute little home situated...   \n",
-       "4          Feb-17  Welcome to our original 1920's home. We recent...   \n",
+       "                                         description   latitude  longitude  \\\n",
+       "0  Welcome to stay in private room with queen bed...  30.020138 -95.293996   \n",
+       "1  Stylish, fully remodeled home in upscale NW ?...  29.503068 -98.447688   \n",
+       "2  'River house on island close to the city' \\nA ...  29.829352 -95.081549   \n",
+       "3  Private bedroom in a cute little home situated...  30.637304 -96.337846   \n",
+       "4  Welcome to our original 1920's home. We recent...  32.747097 -97.286434   \n",
        "\n",
-       "    latitude  longitude                                              title  \\\n",
-       "0  30.020138 -95.293996    2 Private rooms/bathroom 10min from IAH airport   \n",
-       "1  29.503068 -98.447688  Unique Location! Alamo Heights - Designer Insp...   \n",
-       "2  29.829352 -95.081549                          River house near the city   \n",
-       "3  30.637304 -96.337846                       Private Room Close to Campus   \n",
-       "4  32.747097 -97.286434                                          The Porch   \n",
+       "                                               title  \\\n",
+       "0    2 Private rooms/bathroom 10min from IAH airport   \n",
+       "1  Unique Location! Alamo Heights - Designer Insp...   \n",
+       "2                          River house near the city   \n",
+       "3                       Private Room Close to Campus   \n",
+       "4                                          The Porch   \n",
        "\n",
        "                                                 url  \n",
        "0  https://www.airbnb.com/rooms/18520444?location...  \n",
@@ -359,13 +359,13 @@
        "4  https://www.airbnb.com/rooms/17325114?location...  "
       ]
      },
-     "execution_count": 13,
+     "execution_count": 78,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
-    "texas_file = r\"C:\\Users\\Owner\\Documents\\School\\Homework\\etlproject_2019\\Resources\\Airbnb_Texas_Rentals.csv\"\n",
+    "texas_file = r\"C:\\Users\\njoku\\OneDrive\\Documents\\GitHub\\etlproject_2019\\Resources\\Airbnb_Texas_Rentals.csv\"\n",
     "texas_df = pd.read_csv(texas_file, encoding=\"ISO-8859-1\")\n",
     "texas_df.head()"
    ]
@@ -374,12 +374,12 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Transform premise DataFrame"
+    "### Transform Seattle DataFrame"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 79,
    "metadata": {},
    "outputs": [
     {
@@ -403,11 +403,13 @@
        "  <thead>\n",
        "    <tr style=\"text-align: right;\">\n",
        "      <th></th>\n",
-       "      <th>Price</th>\n",
-       "      <th>City</th>\n",
+       "      <th>price</th>\n",
+       "      <th>city</th>\n",
+       "      <th>id</th>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>Bedrooms</th>\n",
+       "      <th>bedrooms</th>\n",
+       "      <th></th>\n",
        "      <th></th>\n",
        "      <th></th>\n",
        "    </tr>\n",
@@ -417,58 +419,63 @@
        "      <th>4</th>\n",
        "      <td>250</td>\n",
        "      <td>Seattle, WA, United States</td>\n",
+       "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
        "      <td>100</td>\n",
        "      <td>Seattle, WA, United States</td>\n",
+       "      <td>2</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>82</td>\n",
        "      <td>Seattle, WA, United States</td>\n",
+       "      <td>3</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>0</th>\n",
        "      <td>49</td>\n",
        "      <td>Seattle, WA, United States</td>\n",
+       "      <td>4</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>90</td>\n",
        "      <td>Seattle, WA, United States</td>\n",
+       "      <td>5</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
       ],
       "text/plain": [
-       "          Price                        City\n",
-       "Bedrooms                                   \n",
-       "4           250  Seattle, WA, United States\n",
-       "2           100  Seattle, WA, United States\n",
-       "1            82  Seattle, WA, United States\n",
-       "0            49  Seattle, WA, United States\n",
-       "1            90  Seattle, WA, United States"
+       "          price                        city  id\n",
+       "bedrooms                                       \n",
+       "4           250  Seattle, WA, United States   1\n",
+       "2           100  Seattle, WA, United States   2\n",
+       "1            82  Seattle, WA, United States   3\n",
+       "0            49  Seattle, WA, United States   4\n",
+       "1            90  Seattle, WA, United States   5"
       ]
      },
-     "execution_count": 18,
+     "execution_count": 79,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
     "# Create a filtered dataframe from specific columns\n",
-    "seattle_cols = [\"price\", \"bedrooms\", \"address\"]\n",
+    "seattle_cols = [\"price\", \"bedrooms\", \"address\",\"id\"]\n",
     "seattle_transformed= seattle_df[seattle_cols].copy()\n",
     "\n",
     "# Rename the column headers\n",
-    "seattle_transformed = seattle_transformed.rename(columns={\"price\": \"Price\",\n",
-    "                                                          \"bedrooms\": \"Bedrooms\",\n",
-    "                                                          \"address\": \"City\"})\n",
+    "seattle_transformed = seattle_transformed.rename(columns={\"price\": \"price\",\n",
+    "                                                          \"bedrooms\": \"bedrooms\",\n",
+    "                                                          \"address\": \"city\"})\n",
     "\n",
     "# Clean the data by dropping duplicates and setting the index\n",
-    "seattle_transformed.set_index(\"Bedrooms\", inplace=True)\n",
+    "seattle_transformed.set_index(\"bedrooms\", inplace=True)\n",
     "\n",
     "seattle_transformed.head()"
    ]
@@ -477,12 +484,12 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Transform county DataFrame"
+    "### Transform Texas DataFrame"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 20,
+   "execution_count": 80,
    "metadata": {},
    "outputs": [
     {
@@ -506,11 +513,13 @@
        "  <thead>\n",
        "    <tr style=\"text-align: right;\">\n",
        "      <th></th>\n",
-       "      <th>Price</th>\n",
-       "      <th>City</th>\n",
+       "      <th>price</th>\n",
+       "      <th>city</th>\n",
+       "      <th>id</th>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>Bedrooms</th>\n",
+       "      <th>bedrooms</th>\n",
+       "      <th></th>\n",
        "      <th></th>\n",
        "      <th></th>\n",
        "    </tr>\n",
@@ -520,58 +529,63 @@
        "      <th>2</th>\n",
        "      <td>$27</td>\n",
        "      <td>Humble</td>\n",
+       "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>$149</td>\n",
        "      <td>San Antonio</td>\n",
+       "      <td>2</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>$59</td>\n",
        "      <td>Houston</td>\n",
+       "      <td>3</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>$60</td>\n",
        "      <td>Bryan</td>\n",
+       "      <td>4</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
        "      <td>$75</td>\n",
        "      <td>Fort Worth</td>\n",
+       "      <td>5</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
       ],
       "text/plain": [
-       "          Price         City\n",
-       "Bedrooms                    \n",
-       "2          $27        Humble\n",
-       "4         $149   San Antonio\n",
-       "1          $59       Houston\n",
-       "1          $60         Bryan\n",
-       "2          $75    Fort Worth"
+       "          price         city  id\n",
+       "bedrooms                        \n",
+       "2          $27        Humble   1\n",
+       "4         $149   San Antonio   2\n",
+       "1          $59       Houston   3\n",
+       "1          $60         Bryan   4\n",
+       "2          $75    Fort Worth   5"
       ]
      },
-     "execution_count": 20,
+     "execution_count": 80,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
-    "texas_cols = [\"average_rate_per_night\", \"bedrooms_count\", \"city\"]\n",
+    "texas_cols = [\"average_rate_per_night\", \"bedrooms_count\", \"city\",\"id\"]\n",
     "texas_transformed = texas_df[texas_cols].copy()\n",
     "\n",
     "# Rename the column headers\n",
-    "texas_transformed = texas_transformed.rename(columns={\"average_rate_per_night\": \"Price\",\n",
-    "                                                         \"bedrooms_count\": \"Bedrooms\",\n",
-    "                                                         \"city\": \"City\",\n",
+    "texas_transformed = texas_transformed.rename(columns={\"average_rate_per_night\": \"price\",\n",
+    "                                                         \"bedrooms_count\": \"bedrooms\",\n",
+    "                                                         \"city\": \"city\",\n",
     "                                                         })\n",
     "\n",
     "# Set index\n",
-    "texas_transformed.set_index(\"Bedrooms\", inplace=True)\n",
+    "texas_transformed.set_index(\"bedrooms\", inplace=True)\n",
     "\n",
     "texas_transformed.head()"
    ]
@@ -585,26 +599,26 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 81,
    "metadata": {},
    "outputs": [],
    "source": [
-    "connection_string = \"postgres:postgres@localhost:5432/customer_db\"\n",
+    "connection_string = \"postgres:postgres@localhost:5432/airbnb\"\n",
     "engine = create_engine(f'postgresql://{connection_string}')"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 82,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "['county', 'premise']"
+       "['airbnbwa', 'airbnbtx']"
       ]
      },
-     "execution_count": 7,
+     "execution_count": 82,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -623,28 +637,21 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 83,
    "metadata": {},
    "outputs": [],
    "source": [
-    "premise_transformed.to_sql(name='premise', con=engine, if_exists='append', index=True)"
+    "seattle_transformed.to_sql(name='airbnbwa', con=engine, if_exists='append', index=True)"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 84,
    "metadata": {},
    "outputs": [],
    "source": [
-    "county_transformed.to_sql(name='county', con=engine, if_exists='append', index=True)"
+    "texas_transformed.to_sql(name='airbnbtx', con=engine, if_exists='append', index=True)"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {
@@ -663,7 +670,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.8"
+   "version": "3.7.3"
   }
  },
  "nbformat": 4,
